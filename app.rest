@@ -1,0 +1,36 @@
+### Get all students
+GET http://localhost:3000/student
+
+
+### Get student by id
+GET http://localhost:3000/student/1234567890
+
+
+### Get student by name
+GET http://localhost:3000/student?name=John%20Doe
+
+
+### Update student by id 
+PUT  http://localhost:3000/student/1234567890
+
+### Remove student by id
+DELETE  http://localhost:3000/student/1234567890
+
+
+### Add new student
+POST http://localhost:3000/student
+Content-Type: application/json
+
+{
+    "name" : "John Doe",
+    "_id" : "123456789"
+}
+
+### Add new student
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "email" : "test@test.com",
+    "password" : "123456789"
+}
