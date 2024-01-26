@@ -3,19 +3,23 @@ import mongoose from "mongoose";
 export interface IUser {
     email: string;
     password: string;
-}
-
-const UserSchema = new mongoose.Schema<IUser>({
+    _id?: string;
+    refreshTokens?: string[];
+  }
+  
+  const userSchema = new mongoose.Schema<IUser>({
     email: {
-        type: String,
-        required: true,
-
+      type: String,
+      required: true,
     },
     password: {
-        type: String,
-        required: true,
-
+      type: String,
+      required: true,
     },
-})
-
-export default mongoose.model<IUser>("User", UserSchema);
+    refreshTokens: {
+      type: [String],
+      //required: false,
+    },
+  });
+  
+  export default mongoose.model<IUser>("User", userSchema);
