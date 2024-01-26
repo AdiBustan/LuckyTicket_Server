@@ -9,25 +9,23 @@ class BaseController<ModelType> {
     }
 
     async get(req: Request, res: Response) {
-        console.log("get all students");
+        console.log("get all");
         try {
-            if(req.query.name) {
-                const students = await this.model.find({name: req.query.name});
-                res.send(students);
-            } else {
-                const students = await this.model.find();
-                res.send(students);
-            }
+            const models = req.query.name ? 
+            await this.model.find({name: req.query.name}) : 
+            await this.model.find();
+            res.status(200).send(models);
+
         } catch(err){
-            res.status(500).json({message: err.message});
+            res.status(500).send({message: err.message});
         }
     }
 
     async getById (req: Request, res: Response) {
         console.log("getById: " + req.params.id)
         try {
-            const student = await this.model.findById(req.params.id);
-            res.send(student);
+            const model = await this.model.findById(req.params.id);
+            res.send(model);
         } catch(err) {
             res.status(500).json({message: err.message});
         }
@@ -37,11 +35,12 @@ class BaseController<ModelType> {
         console.log("post: " + req.body);
         
         try {
-            await this.model.create(req.body);
-            res.status(201).send("OK");
+            const model = await this.model.create(req.body);
+            res.status(201).send(model);
 
         } catch(err) {
-            res.send("fail: " + err.message);
+            console.log(err);
+            res.status(406).send("fail: " + err.message);
         }
         
     }
@@ -49,15 +48,18 @@ class BaseController<ModelType> {
     async putById (req: Request, res: Response) {
         console.log("putById: " + req.params.id)
         try {
-            const student = await this.model.findByIdAndUpdate(req.params.id, {name: "adi"}, );
-            res.send(student);
+            const model = await this.model.findByIdAndUpdate(req.body._id, 
+                {name: req.body.name}, 
+                {new: true});
+            res.status(200).send(model);
         } catch(err) {
+            console.log(err)
             res.status(500).json({message: err.message});
         }
     }
 
     async deleteById(req: Request, res: Response) {
-        console.log("deleteStudentById: " + req.params.id)
+        console.log("deleteById: " + req.params.id)
         try {
             const student = await this.model.findByIdAndDelete(req.params.id);
             res.send(student);
@@ -65,8 +67,10 @@ class BaseController<ModelType> {
             res.status(500).json({message: err.message});
         }
     }
+}
 
-        
-    }
+// const createController = <ModelType>(model: Model<ModelType>) => {
+//     return new BaseController<ModelType>(model);
+// }
 
 export default BaseController
