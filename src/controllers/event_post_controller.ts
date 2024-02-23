@@ -10,8 +10,6 @@ class EventPostController extends BaseController<IEventPost>{
 
     async post(req: AuthResquest, res: Response) {
         console.log("postEvent:" + req.body);
-        console.log("=================user=======: "+req.user)
-
         const _id = req.user._id;
         req.body.owner = _id;
         super.post(req, res);

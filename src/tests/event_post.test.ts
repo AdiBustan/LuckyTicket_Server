@@ -7,8 +7,8 @@ import User, { IUser } from "../models/user_model";
 
 let app: Express;
 const user: IUser = {
-  email: "test@event.post.test",
-  password: "1234567890",
+  email: "test@event1236.post.test",
+  password: "1234567890123",
 }
 let accessToken = "";
 
@@ -20,8 +20,8 @@ beforeAll(async () => {
   User.deleteMany({ 'email': user.email });
   await request(app).post("/auth/register").send(user);
   const response = await request(app).post("/auth/login").send(user);
+  user._id = (await (User.findOne({ 'email': user.email })))._id.toString()
   expect(response.statusCode).toBe(200);
-  console.log("================user login " + response.body.user)
   accessToken = response.body.accessToken;
 });
 
@@ -41,6 +41,9 @@ describe("Event post tests", () => {
       .set("Authorization", "JWT " + accessToken)
       .send(post);
     expect(response.statusCode).toBe(201); //Created
+    expect(response.body.owner).toBe(user._id);
+    expect(response.body.title).toBe(post.title);
+    expect(response.body.message).toBe(post.message);
   };
 
   test("Test Get All Event posts - empty response", async () => {
@@ -53,18 +56,6 @@ describe("Event post tests", () => {
     addPost(post);
   });
 
-  // test("Test Post Event post", async () => {
-  //   const response = await request(app)
-  //     .post("/eventpost")
-  //     .set("Authorization", "JWT " + accessToken)
-  //     .send(post1);
-  //   expect(response.statusCode).toBe(201);
-  //   expect(response.body.owner).toBe(user._id);
-  //   console.log("============ owner: " + response.body.owner)
-  //   expect(response.body.title).toBe(post1.title);
-  //   expect(response.body.message).toBe(post1.message);
-  // });
-
   test("Test Get All posts with one post in DB", async () => {
     const response = await request(app)
     .get("/eventpost")
@@ -72,7 +63,6 @@ describe("Event post tests", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(1);
     const rc = response.body[0];
-    console.log("===============rc: =========" + rc.body)
     expect(rc.title).toBe(post.title);
     expect(rc.message).toBe(post.message);
     expect(rc.owner).toBe(user._id);
