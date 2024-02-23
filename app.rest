@@ -20,10 +20,14 @@ DELETE  http://localhost:3000/event/1234567890
 ### Add new event
 POST http://localhost:3000/event
 Content-Type: application/json
-
 {
-    "name" : "John Doe",
-    "_id" : "1234567890"
+    "date": "04.08.2024",
+    "hour": "20:00:00",
+    "location": "Zapa Herzeliya",
+    "city": "Herzeliya",
+    "artist": "Natan Goshen",
+    "image": "something.jpg",
+    "_id": "1234567890",
 }
 
 ###
