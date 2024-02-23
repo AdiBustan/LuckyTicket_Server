@@ -68,21 +68,21 @@ describe("login tests", () => {
   });
 
   test("Test forbidden access without token", async () => {
-    const response = await request(app).get("/student");
+    const response = await request(app).get("/event");
     expect(response.statusCode).toBe(401); //Unauthorized
   });
 
 
   test("Test access with valid token", async () => {
       const response = await request(app)
-        .get("/student")
+        .get("/event")
         .set("Authorization", "JWT " + accessToken);
       expect(response.statusCode).toBe(200); //OK
   });
     
   test("Test access with invalid token", async () => {
       const response = await request(app)
-        .get("/student")
+        .get("/event")
         .set("Authorization", "JWT 1" + accessToken);
       expect(response.statusCode).toBe(401); //Unauthorized
   });
@@ -93,7 +93,7 @@ describe("login tests", () => {
       await new Promise(resolve => setTimeout(() => resolve("done"), 5000));
   
       const response = await request(app)
-        .get("/student")
+        .get("/event")
         .set("Authorization", "JWT " + accessToken);
       expect(response.statusCode).not.toBe(200); //OK
   });
@@ -114,7 +114,7 @@ describe("refresh token tests", () => {
       newRefreshToken = response.body.refreshToken;
   
       const response2 = await request(app)
-        .get("/student")
+        .get("/event")
         .set("Authorization", "JWT " + newAccessToken);
       expect(response2.statusCode).toBe(200); //OK
   });

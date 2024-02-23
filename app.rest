@@ -1,24 +1,24 @@
-### Get all students
-GET http://localhost:3000/student
+### Get all events
+GET http://localhost:3000/event
 
 
-### Get student by id
-GET http://localhost:3000/student/1234567890
+### Get event by id
+GET http://localhost:3000/event/1234567890
 
 
-### Get student by name
-GET http://localhost:3000/student?name=John%20Doe
+### Get event by name
+GET http://localhost:3000/event?name=John%20Doe
 
 
-### Update student by id 
-PUT  http://localhost:3000/student/1234567890
+### Update event by id 
+PUT  http://localhost:3000/event/1234567890
 
-### Remove student by id
-DELETE  http://localhost:3000/student/1234567890
+### Remove event by id
+DELETE  http://localhost:3000/event/1234567890
 
 
-### Add new student
-POST http://localhost:3000/student
+### Add new event
+POST http://localhost:3000/event
 Content-Type: application/json
 
 {
@@ -27,10 +27,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/student
+POST http://localhost:3000/event
 
 
-### Add new student
+### Add new event
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 

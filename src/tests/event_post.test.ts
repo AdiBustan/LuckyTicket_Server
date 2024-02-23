@@ -2,12 +2,12 @@ import { Express } from "express";
 import request from "supertest";
 import initApp from "../app";
 import mongoose from "mongoose";
-import StudentPost, { IStudentPost } from "../models/student_post_model";
+import EventPost, { IEventPost } from "../models/event_post_model";
 import User, { IUser } from "../models/user_model";
 
 let app: Express;
 const user: IUser = {
-  email: "test@student.post.test",
+  email: "test@event.post.test",
   password: "1234567890",
 }
 let accessToken = "";
@@ -15,7 +15,7 @@ let accessToken = "";
 beforeAll(async () => {
   app = await initApp();
   console.log("beforeAll");
-  await StudentPost.deleteMany();
+  await EventPost.deleteMany();
 
   User.deleteMany({ 'email': user.email });
   await request(app).post("/auth/register").send(user);
@@ -29,22 +29,22 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-const post: IStudentPost = {
+const post: IEventPost = {
   title: "title1",
   message: "message1",
   owner: "1234567890",
 };
 
-describe("Student post tests", () => {
-  const addPost = async (post: IStudentPost) => {
-    const response = await request(app).post("/studentpost")
+describe("Event post tests", () => {
+  const addPost = async (post: IEventPost) => {
+    const response = await request(app).post("/eventpost")
       .set("Authorization", "JWT " + accessToken)
       .send(post);
     expect(response.statusCode).toBe(201); //Created
   };
 
-  test("Test Get All Student posts - empty response", async () => {
-    const response = await request(app).get("/studentpost").set("Authorization", "JWT " + accessToken);
+  test("Test Get All Event posts - empty response", async () => {
+    const response = await request(app).get("/eventpost").set("Authorization", "JWT " + accessToken);
     expect(response.statusCode).toBe(200);
     expect(response.body).toStrictEqual([]);
   });
@@ -53,9 +53,9 @@ describe("Student post tests", () => {
     addPost(post);
   });
 
-  // test("Test Post Student post", async () => {
+  // test("Test Post Event post", async () => {
   //   const response = await request(app)
-  //     .post("/studentpost")
+  //     .post("/eventpost")
   //     .set("Authorization", "JWT " + accessToken)
   //     .send(post1);
   //   expect(response.statusCode).toBe(201);
@@ -67,7 +67,7 @@ describe("Student post tests", () => {
 
   test("Test Get All posts with one post in DB", async () => {
     const response = await request(app)
-    .get("/studentpost")
+    .get("/eventpost")
     .set("Authorization", "JWT " + accessToken);
     expect(response.statusCode).toBe(200);
     expect(response.body.length).toBe(1);

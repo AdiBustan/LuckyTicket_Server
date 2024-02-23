@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-export interface IStudentPost {
+export interface IEventPost {
     title: string;
     message: string;
     owner: string;
 }
 
-const studentPostSchema = new mongoose.Schema<IStudentPost>({
+const eventPostSchema = new mongoose.Schema<IEventPost>({
     title: {
         type: String,
         required: true,
@@ -24,4 +24,4 @@ const studentPostSchema = new mongoose.Schema<IStudentPost>({
     },
 })
 
-export default mongoose.model<IStudentPost>("StudentsPost", studentPostSchema);
+export default mongoose.model<IEventPost>("EventPosts", eventPostSchema);
