@@ -49,7 +49,7 @@ class BaseController<ModelType> {
         console.log("putById: " + req.params.id)
         try {
             const model = await this.model.findByIdAndUpdate(req.body._id, 
-                {name: req.body.name}, 
+                {date: req.body.date},                 
                 {new: true});
             res.status(200).send(model);
         } catch(err) {
@@ -61,16 +61,12 @@ class BaseController<ModelType> {
     async deleteById(req: Request, res: Response) {
         console.log("deleteById: " + req.params.id)
         try {
-            const student = await this.model.findByIdAndDelete(req.params.id);
-            res.send(student);
+            const event = await this.model.findByIdAndDelete(req.params.id);
+            res.send(event);
         } catch(err) {
             res.status(500).json({message: err.message});
         }
     }
 }
-
-// const createController = <ModelType>(model: Model<ModelType>) => {
-//     return new BaseController<ModelType>(model);
-// }
 
 export default BaseController

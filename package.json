@@ -6,8 +6,8 @@
   "scripts": {
     "test": "tsc && jest --detectOpenHandles --forceExit",
     "testauth": "tsc && jest --detectOpenHandles --forceExit ./src/tests/auth.test.ts",
-    "testpost": "tsc && jest --detectOpenHandles --forceExit ./src/tests/student_post.test.ts",
-    "teststudent": "tsc && jest --detectOpenHandles --forceExit ./src/tests/student.test.ts",
+    "testpost": "tsc && jest --detectOpenHandles --forceExit ./src/tests/event_post.test.ts",
+    "testevent": "tsc && jest --detectOpenHandles --forceExit ./src/tests/event.test.ts",
     "start": "tsc && node ./dist/src/server.js",
     "dev": "nodemon ./src/server.ts"
   },
