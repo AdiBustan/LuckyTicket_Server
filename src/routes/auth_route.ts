@@ -88,7 +88,7 @@ router.post("/register", authController.register);
 * @swagger
 * /auth/login:
 *   post:
-*     summary: registers a new user
+*     summary: login a user
 *     tags: [Auth]
 *     requestBody:
 *       required: true
@@ -120,6 +120,21 @@ router.post("/login", authController.login);
 *         description: logout completed successfully
 */
 router.get("/logout", authController.logout);
+
+
+/**
+* @swagger
+* /auth/refresh:
+*   get:
+*     summary: get the refresh token
+*     tags: [Auth]
+*     description: after the timeout of the access token, for getting a new one
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: refresh the token completed successfully
+*/
 router.get("/refresh", authController.refresh);
 
 export default router;

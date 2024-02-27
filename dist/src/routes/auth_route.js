@@ -86,7 +86,7 @@ router.post("/register", auth_controller_1.default.register);
 * @swagger
 * /auth/login:
 *   post:
-*     summary: registers a new user
+*     summary: login a user
 *     tags: [Auth]
 *     requestBody:
 *       required: true
@@ -117,6 +117,19 @@ router.post("/login", auth_controller_1.default.login);
 *         description: logout completed successfully
 */
 router.get("/logout", auth_controller_1.default.logout);
+/**
+* @swagger
+* /auth/refresh:
+*   get:
+*     summary: get the refresh token
+*     tags: [Auth]
+*     description: after the timeout of the access token, for getting a new one
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: refresh the token completed successfully
+*/
 router.get("/refresh", auth_controller_1.default.refresh);
 exports.default = router;
 //# sourceMappingURL=auth_route.js.map

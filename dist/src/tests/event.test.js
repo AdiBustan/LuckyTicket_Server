@@ -36,13 +36,13 @@ afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
     yield mongoose_1.default.connection.close();
 }));
 const event = {
-    date: "15.08.2024",
+    date: "04.08.2024",
     hour: "20:00:00",
     location: "Zapa Herzeliya",
     city: "Herzeliya",
     artist: "Natan Goshen",
     image: "something.jpg",
-    _id: "123456789011",
+    _id: "1234567890",
 };
 describe("Event tests", () => {
     const addEvent = (event) => __awaiter(void 0, void 0, void 0, function* () {
@@ -87,11 +87,11 @@ describe("Event tests", () => {
         expect(response.statusCode).toBe(200);
         expect(response.body.date).toBe(updatedEvent.date);
     }));
-    // test("Test DELETE /event/:id", async () => {
-    //   const response = await request(app).
-    //   delete(`/event/${event._id}`)
-    //   .set("Authorization", "JWT " + accessToken)
-    //   expect(response.statusCode).toBe(200);
-    // });
+    test("Test DELETE /event/:id", () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield (0, supertest_1.default)(app).
+            delete(`/event/${event._id}`)
+            .set("Authorization", "JWT " + accessToken);
+        expect(response.statusCode).toBe(200);
+    }));
 });
 //# sourceMappingURL=event.test.js.map
