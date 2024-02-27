@@ -69,8 +69,6 @@ const auth_middleware_1 = __importDefault(require("../common/auth_middleware"));
 *     tags: [Event]
 *     security:
 *       bearerAuth: []
-*     requestBody:
-*       required: false
 *     responses:
 *       200:
 *         description: List of the posts
@@ -95,8 +93,6 @@ router.get("/", auth_middleware_1.default, event_controller_1.default.get.bind(e
 *           type: string
 *     security:
 *       bearerAuth: []
-*     requestBody:
-*       required: false
 *     responses:
 *       200:
 *         description: the event with the chosen id
