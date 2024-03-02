@@ -17,6 +17,13 @@ const initApp = (): Promise<Express> => {
             const app = express();
             app.use(bodyParser.json());
             app.use(bodyParser.urlencoded({ extended: true }));
+            app.use((req, res, next) => {
+                // Dealing with CORS problam
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "*");
+                res.header("Access-Control-Allow-Methods", "*");
+                next();
+            })
             app.use("/event", eventRoute);
             app.use("/eventPost", eventPostRoute);
             app.use("/auth", authRoute);
