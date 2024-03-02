@@ -165,16 +165,10 @@ const refresh = async (req: Request, res: Response) => {
     });
 }
 
-const check = async (req: Request, res: Response) => {
-    console.log("Log check")
-    return res.status(200).send("Check is work")
-}
-
 export default {
     register,
     login,
     logout,
     refresh,
-    check,
     googleSignin
 }
