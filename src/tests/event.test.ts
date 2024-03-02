@@ -98,9 +98,9 @@ describe("Event tests", () => {
     });
 
     test("Test DELETE /event/:id", async () => {
-      const response = await request(app).
-      delete(`/event/${event._id}`)
-      .set("Authorization", "JWT " + accessToken)
-      expect(response.statusCode).toBe(200);
+    const response = await request(app).
+    delete(`/event/${event._id}`)
+    .set("Authorization", "JWT " + accessToken)
+    expect(response.statusCode).toBe(200);
     });
 });
