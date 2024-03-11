@@ -49,8 +49,7 @@ class BaseController<ModelType> {
         console.log("putById: " + req.params.id)
         try {
             const model = await this.model.findByIdAndUpdate(req.body._id, 
-                {date: req.body.date},                 
-                {new: true});
+                {comments: req.body.comments});
             res.status(200).send(model);
         } catch(err) {
             console.log(err)

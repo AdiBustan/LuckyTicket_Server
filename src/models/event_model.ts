@@ -8,6 +8,7 @@ export interface IEvent {
     artist: string;
     image: string;
     _id: string;
+    comments: Array<string>;
 }
 
 const eventSchema = new mongoose.Schema<IEvent>({
@@ -44,6 +45,9 @@ const eventSchema = new mongoose.Schema<IEvent>({
     _id: {
         type: String,
     },
+    comments: {
+        type: [String],
+    }
 })
 
 export default mongoose.model<IEvent>("Events", eventSchema);
