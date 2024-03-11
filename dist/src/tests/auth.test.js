@@ -20,6 +20,7 @@ let app;
 const user = {
     email: "testUser@test.com",
     password: "1234567890",
+    phone: "0587299721"
 };
 beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
     app = yield (0, app_1.default)();

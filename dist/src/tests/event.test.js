@@ -42,6 +42,8 @@ const event = {
     city: "Herzeliya",
     artist: "Natan Goshen",
     image: "something.jpg",
+    phone: "",
+    comments: [],
     _id: "1234567890",
 };
 describe("Event tests", () => {
