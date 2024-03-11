@@ -7,8 +7,9 @@ export interface IEvent {
     city: string;
     artist: string;
     image: string;
-    _id: string;
+    phone: string;
     comments: Array<string>;
+    _id?: string;
 }
 
 const eventSchema = new mongoose.Schema<IEvent>({
@@ -42,11 +43,14 @@ const eventSchema = new mongoose.Schema<IEvent>({
         required: true,
 
     },
-    _id: {
+    phone: {
         type: String,
+        required: true,
     },
     comments: {
         type: [String],
+        required: true,
+
     }
 })
 

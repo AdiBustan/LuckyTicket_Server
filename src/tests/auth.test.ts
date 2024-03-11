@@ -9,6 +9,7 @@ let app:Express;
 const user = {
     email: "testUser@test.com",
     password: "1234567890",
+    phone: "0587299721"
 }
   
 beforeAll(async () => {

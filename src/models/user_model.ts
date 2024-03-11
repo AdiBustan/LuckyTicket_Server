@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 export interface IUser {
     email: string;
     password: string;
+    phone: string;
     _id?: string;
     refreshTokens?: string[];
   }
@@ -13,6 +14,10 @@ export interface IUser {
       required: true,
     },
     password: {
+      type: String,
+      required: true,
+    },
+    phone: {
       type: String,
       required: true,
     },

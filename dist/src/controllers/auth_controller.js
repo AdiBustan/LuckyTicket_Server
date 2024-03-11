@@ -15,11 +15,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = __importDefault(require("../models/user_model"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const google_auth_library_1 = require("google-auth-library");
+const client = new google_auth_library_1.OAuth2Client();
+const googleSignin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body);
+    try {
+        const ticket = yield client.verifyIdToken({
+            idToken: req.body.credential,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        const email = payload === null || payload === void 0 ? void 0 : payload.email;
+        if (email != null) {
+            let user = yield user_model_1.default.findOne({ 'email': email });
+            if (user == null) {
+                user = yield user_model_1.default.create({
+                    'email': email,
+                    'password': '0',
+                    'imgUrl': payload === null || payload === void 0 ? void 0 : payload.picture
+                });
+            }
+            // const tokens = await generateTokens(user)
+            res.status(200).send({
+                email: user.email,
+                _id: user._id,
+                // ...tokens
+            });
+        }
+    }
+    catch (err) {
+        return res.status(400).send(err.message);
+    }
+});
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const email = req.body.email;
     const password = req.body.password;
-    if (!email || !password) {
-        return res.status(400).send("missing email or password");
+    const phone = req.body.phone;
+    console.log("email: " + email + ", password: " + password + ", phone: " + phone);
+    if (!email || !password || !phone) {
+        return res.status(400).send("missing email or password or phone");
     }
     try {
         const rs = yield user_model_1.default.findOne({ 'email': email });
@@ -28,18 +62,34 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const salt = yield bcrypt_1.default.genSalt(10);
         const encryptedPassword = yield bcrypt_1.default.hash(password, salt);
-        const rs2 = yield user_model_1.default.create({ 'email': email, 'password': encryptedPassword });
+        const rs2 = yield user_model_1.default.create({ 'email': email, 'password': encryptedPassword, 'phone': phone });
         return res.status(201).send(rs2);
     }
     catch (err) {
         return res.status(400).send("error missing email or password");
     }
 });
+const generateTokens = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    const accessToken = jsonwebtoken_1.default.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRATION });
+    const refreshToken = jsonwebtoken_1.default.sign({ _id: user._id }, process.env.JWT_REFRESH_SECRET);
+    if (user.refreshTokens == null) {
+        user.refreshTokens = [refreshToken];
+    }
+    else {
+        user.refreshTokens.push(refreshToken);
+    }
+    // await user.save();
+    return {
+        'accessToken': accessToken,
+        'refreshToken': refreshToken
+    };
+});
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const email = req.body.email;
     const password = req.body.password;
-    if (!email || !password) {
-        return res.status(400).send("missing email or password");
+    const phone = req.body.phone;
+    if (!email || !password || !phone) {
+        return res.status(400).send("missing email or password or phone");
     }
     try {
         const user = yield user_model_1.default.findOne({ 'email': email });
@@ -131,6 +181,7 @@ exports.default = {
     register,
     login,
     logout,
-    refresh
+    refresh,
+    googleSignin
 };
 //# sourceMappingURL=auth_controller.js.map

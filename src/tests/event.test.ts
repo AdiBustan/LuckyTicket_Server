@@ -36,6 +36,8 @@ interface IEvent {
   city: string;
   artist: string;
   image: string;
+  phone: string;
+  comments: Array<string>;
   _id: string;
 }
 
@@ -46,6 +48,8 @@ const event: IEvent = {
     city: "Herzeliya",
     artist: "Natan Goshen",
     image: "something.jpg",
+    phone: "",
+    comments: [],
     _id: "1234567890",
 };
   
