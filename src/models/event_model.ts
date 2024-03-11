@@ -8,6 +8,7 @@ export interface IEvent {
     artist: string;
     image: string;
     _id?: string;
+    comments: Array<string>;
 }
 
 const eventSchema = new mongoose.Schema<IEvent>({
