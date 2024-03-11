@@ -56,7 +56,7 @@ class BaseController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("putById: " + req.params.id);
             try {
-                const model = yield this.model.findByIdAndUpdate(req.body._id, { date: req.body.date }, { new: true });
+                const model = yield this.model.findByIdAndUpdate(req.body._id, { comments: req.body.comments });
                 res.status(200).send(model);
             }
             catch (err) {
