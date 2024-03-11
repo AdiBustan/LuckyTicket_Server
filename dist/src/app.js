@@ -21,6 +21,13 @@ const initApp = () => {
             const app = (0, express_1.default)();
             app.use(body_parser_1.default.json());
             app.use(body_parser_1.default.urlencoded({ extended: true }));
+            app.use((req, res, next) => {
+                // Dealing with CORS problam
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "*");
+                res.header("Access-Control-Allow-Methods", "*");
+                next();
+            });
             app.use("/event", event_route_1.default);
             app.use("/eventPost", event_post_route_1.default);
             app.use("/auth", auth_route_1.default);

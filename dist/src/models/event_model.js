@@ -29,9 +29,6 @@ const eventSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
-    _id: {
-        type: String,
-    },
 });
 exports.default = mongoose_1.default.model("Events", eventSchema);
 //# sourceMappingURL=event_model.js.map
