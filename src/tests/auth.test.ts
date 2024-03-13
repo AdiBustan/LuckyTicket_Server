@@ -7,6 +7,7 @@ import User from "../models/user_model";
 
 let app:Express;
 const user = {
+  username: "adibustan",
     email: "testUser@test.com",
     password: "1234567890",
     phone: "0587299721"
