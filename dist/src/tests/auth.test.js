@@ -18,6 +18,7 @@ const app_1 = __importDefault(require("../app"));
 const user_model_1 = __importDefault(require("../models/user_model"));
 let app;
 const user = {
+    username: "adibustan",
     email: "testUser@test.com",
     password: "1234567890",
     phone: "0587299721"

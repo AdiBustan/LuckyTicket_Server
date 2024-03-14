@@ -50,16 +50,12 @@ const auth_middleware_1 = __importDefault(require("../common/auth_middleware"));
 *         artist:
 *           type: string
 *           description: The artist in the event
-*         image:
-*           type: string
-*           description: The image of the event
 *       example:
 *         date: '04.08.2024'
 *         hour: '20:00:00'
 *         location: 'Zapa Herzeliya'
 *         city: 'Herzeliya'
 *         artist: 'Natan Goshen'
-*         image: 'something.jpg'
 */
 /**
 * @swagger

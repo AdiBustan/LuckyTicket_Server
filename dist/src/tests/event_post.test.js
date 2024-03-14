@@ -19,6 +19,7 @@ const event_post_model_1 = __importDefault(require("../models/event_post_model")
 const user_model_1 = __importDefault(require("../models/user_model"));
 let app;
 const user = {
+    username: "Adibustan",
     email: "test@event1236.post.test",
     password: "1234567890123",
     phone: "0587299721"

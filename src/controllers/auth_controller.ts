@@ -40,6 +40,7 @@ const googleSignin = async (req: Request, res: Response) => {
 }
 
 const register = async (req: Request, res: Response) => {
+    const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
     const phone = req.body.phone;
@@ -55,7 +56,7 @@ const register = async (req: Request, res: Response) => {
         }
         const salt = await bcrypt.genSalt(10);
         const encryptedPassword = await bcrypt.hash(password, salt);
-        const rs2 = await User.create({ 'email': email, 'password': encryptedPassword, 'phone':  phone});
+        const rs2 = await User.create({ 'username': username, 'email': email, 'password': encryptedPassword, 'phone':  phone});
         return res.status(201).send(rs2);
     } catch (err) {
         return res.status(400).send("error missing email or password");
@@ -80,10 +81,9 @@ const generateTokens = async (user: Document & IUser) => {
 const login = async (req: Request, res: Response) => {
     const email = req.body.email;
     const password = req.body.password;
-    const phone = req.body.phone;
 
-    if (!email || !password || !phone) {
-        return res.status(400).send("missing email or password or phone");
+    if (!email || !password) {
+        return res.status(400).send("missing email or password");
     }
     try {
         const user = await User.findOne({ 'email': email });
