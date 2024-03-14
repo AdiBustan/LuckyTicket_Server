@@ -51,7 +51,11 @@ const eventSchema = new mongoose.Schema<IEvent>({
         type: [String],
         required: true,
 
-    }
+    },
+    _id: {
+        type: String,
+        required: true,
+    },
 })
 
 export default mongoose.model<IEvent>("Events", eventSchema);
