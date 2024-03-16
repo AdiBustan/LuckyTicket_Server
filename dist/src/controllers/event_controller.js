@@ -19,6 +19,14 @@ class eventController extends base_controller_1.default {
     constructor() {
         super(event_model_1.default);
     }
+    getByUserId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("get events by user id:" + req.user._id);
+            const userId = req.user._id;
+            const events = yield event_model_1.default.find({ 'ownerId': userId });
+            res.status(200).send(events);
+        });
+    }
     post(req, res) {
         const _super = Object.create(null, {
             post: { get: () => super.post }

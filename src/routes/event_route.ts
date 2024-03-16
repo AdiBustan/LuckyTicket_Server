@@ -49,16 +49,12 @@ import authMiddleware from "../common/auth_middleware";
 *         artist:
 *           type: string
 *           description: The artist in the event
-*         image:
-*           type: string
-*           description: The image of the event
 *       example:
 *         date: '04.08.2024'
 *         hour: '20:00:00'
 *         location: 'Zapa Herzeliya'
 *         city: 'Herzeliya'
 *         artist: 'Natan Goshen'
-*         image: 'something.jpg'
 */
 
 /**
@@ -78,6 +74,8 @@ import authMiddleware from "../common/auth_middleware";
 *               $ref: '#/components/schemas/Event'
 */
 router.get("/", authMiddleware, eventController.get.bind(eventController));
+
+router.get("/myEvents/", authMiddleware, eventController.getByUserId.bind(eventController));
 
 
 /**

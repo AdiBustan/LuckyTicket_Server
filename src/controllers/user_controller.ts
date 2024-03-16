@@ -1,31 +1,31 @@
 import { AuthResquest } from "../common/auth_middleware";
-import EventModel, { IEvent } from "../models/event_model";
 import BaseController from "./base_controller";
 import { Response } from "express";
-import User from '../models/user_model';
+import User, { IUser } from '../models/user_model';
+import user_model from "../models/user_model";
 
 
-class eventController extends BaseController<IEvent>{
+class userController extends BaseController<IUser>{
     constructor() {
-        super(EventModel)
+        super(user_model)
     }
 
     async getByUserId(req: AuthResquest, res: Response) {
-        console.log("get events by user id:" + req.user._id);
+        console.log("user email:" + req.body);
         const userId = req.user._id;
-        const events = await EventModel.find({'ownerId': userId});
-        res.status(200).send(events);
+        console.log("connected user: " + userId)
+        const user = await User.findOne({ '_id': userId });
+        res.status(200).send(user);
     }
 
     async post(req: AuthResquest, res: Response) {
-        console.log("postEvent:" + req.body);
+        console.log("user:" + req.body);
         const _id = req.user._id;
         console.log("connected user: " + _id)
         const user = await User.findOne({ '_id': _id });
         req.body.phone = user.phone;
-        req.body.ownerId = _id;
         super.post(req, res);
     }
 }
 
-export default new eventController();
+export default new userController();

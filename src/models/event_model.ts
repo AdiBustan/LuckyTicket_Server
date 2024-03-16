@@ -6,10 +6,10 @@ export interface IEvent {
     location: string;
     city: string;
     artist: string;
-    image: string;
     phone: string;
     comments: Array<string>;
     _id?: string;
+    ownerId: string;
 }
 
 const eventSchema = new mongoose.Schema<IEvent>({
@@ -38,11 +38,6 @@ const eventSchema = new mongoose.Schema<IEvent>({
         required: true,
 
     },
-    image: {
-        type: String,
-        required: true,
-
-    },
     phone: {
         type: String,
         required: true,
@@ -52,7 +47,7 @@ const eventSchema = new mongoose.Schema<IEvent>({
         required: true,
 
     },
-    _id: {
+    ownerId: {
         type: String,
         required: true,
     },

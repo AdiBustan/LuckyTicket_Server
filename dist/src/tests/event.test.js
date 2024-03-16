@@ -41,7 +41,6 @@ const event = {
     location: "Zapa Herzeliya",
     city: "Herzeliya",
     artist: "Natan Goshen",
-    image: "something.jpg",
     phone: "",
     comments: [],
     _id: "1234567890",
@@ -73,7 +72,6 @@ describe("Event tests", () => {
         expect(ev.location).toBe(event.location);
         expect(ev.city).toBe(event.city);
         expect(ev.artist).toBe(event.artist);
-        expect(ev.image).toBe(event.image);
         expect(ev._id).toBe(event._id);
     }));
     test("Test Post duplicate Event", () => __awaiter(void 0, void 0, void 0, function* () {

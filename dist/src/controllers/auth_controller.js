@@ -48,6 +48,7 @@ const googleSignin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
     const phone = req.body.phone;
@@ -62,7 +63,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const salt = yield bcrypt_1.default.genSalt(10);
         const encryptedPassword = yield bcrypt_1.default.hash(password, salt);
-        const rs2 = yield user_model_1.default.create({ 'email': email, 'password': encryptedPassword, 'phone': phone });
+        const rs2 = yield user_model_1.default.create({ 'username': username, 'email': email, 'password': encryptedPassword, 'phone': phone });
         return res.status(201).send(rs2);
     }
     catch (err) {
@@ -87,9 +88,8 @@ const generateTokens = (user) => __awaiter(void 0, void 0, void 0, function* () 
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const email = req.body.email;
     const password = req.body.password;
-    const phone = req.body.phone;
-    if (!email || !password || !phone) {
-        return res.status(400).send("missing email or password or phone");
+    if (!email || !password) {
+        return res.status(400).send("missing email or password");
     }
     try {
         const user = yield user_model_1.default.findOne({ 'email': email });
