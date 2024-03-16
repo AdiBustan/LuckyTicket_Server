@@ -22,7 +22,7 @@ class eventController extends BaseController<IEvent>{
         const _id = req.user._id;
         console.log("connected user: " + _id)
         const user = await User.findOne({ '_id': _id });
-        req.body.phone = user.phone;
+        req.body.phone = user.phone? user.phone : user.email;
         req.body.ownerId = _id;
         super.post(req, res);
     }
