@@ -151,7 +151,7 @@ router.post("/", auth_middleware_1.default, event_controller_1.default.post.bind
 *             schema:
 *               $ref: '#/components/schemas/Event'
 */
-router.put("/:id/", auth_middleware_1.default, event_controller_1.default.putById.bind(event_controller_1.default));
+router.put("/:id/", auth_middleware_1.default, event_controller_1.default.updateEventById.bind(event_controller_1.default));
 /**
 * @swagger
 * /event/{_id}:

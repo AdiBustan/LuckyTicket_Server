@@ -33,10 +33,6 @@ const eventSchema = new mongoose_1.default.Schema({
         type: [String],
         required: true,
     },
-    _id: {
-        type: String,
-        required: true,
-    },
     ownerId: {
         type: String,
         required: true,

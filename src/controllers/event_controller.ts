@@ -17,6 +17,23 @@ class eventController extends BaseController<IEvent>{
         res.status(200).send(events);
     }
 
+    async updateEventById (req: AuthResquest, res: Response) {
+        console.log("updateEventById: " + req.body._id)
+        try {
+            const model = await EventModel.findByIdAndUpdate(req.body._id, 
+                {   date: req.body.date,
+                    hour: req.body.hour,
+                    location: req.body.location,
+                    city: req.body.city,
+                    artist: req.body.artist,
+                    comments: req.body.comments});
+            res.status(200).send(model);
+        } catch(err) {
+            console.log(err)
+            res.status(500).json({message: err.message});
+        }
+    }
+
     async post(req: AuthResquest, res: Response) {
         console.log("postEvent:" + req.body);
         const _id = req.user._id;
