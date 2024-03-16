@@ -28,7 +28,7 @@ class eventController extends base_controller_1.default {
             const _id = req.user._id;
             console.log("connected user: " + _id);
             const user = yield user_model_1.default.findOne({ '_id': _id });
-            req.body.phone = user.phone;
+            req.body.phone = user.phone ? user.phone : user.email;
             _super.post.call(this, req, res);
         });
     }
