@@ -6,6 +6,7 @@ export interface IUser {
     password: string;
     phone: string;
     _id?: string;
+    imgName?: string;
     refreshTokens?: string[];
   }
   
@@ -30,6 +31,9 @@ export interface IUser {
       type: [String],
       //required: false,
     },
+    imgName: {
+      type: String,
+    }
   });
   
   export default mongoose.model<IUser>("User", userSchema);

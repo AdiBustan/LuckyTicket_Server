@@ -7,6 +7,7 @@ import eventRoute from "./routes/event_route";
 import eventPostRoute from "./routes/event_post_route";
 import authRoute from "./routes/auth_route";
 import userRoute from "./routes/user_route";
+import fileRoute from "./controllers/file_controller";
 import user_controller from "./controllers/user_controller";
 
 const initApp = (): Promise<Express> => {
@@ -30,6 +31,7 @@ const initApp = (): Promise<Express> => {
             app.use("/eventPost", eventPostRoute);
             app.use("/auth", authRoute);
             app.use("/user", userRoute);
+            app.use("/file", fileRoute);
             resolve(app);
         });
     });

@@ -36,7 +36,8 @@ class eventController extends base_controller_1.default {
                     location: req.body.location,
                     city: req.body.city,
                     artist: req.body.artist,
-                    comments: req.body.comments });
+                    comments: req.body.comments,
+                    imgName: req.body.imgName });
                 res.status(200).send(model);
             }
             catch (err) {

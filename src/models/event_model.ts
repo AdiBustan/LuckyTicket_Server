@@ -10,6 +10,7 @@ export interface IEvent {
     comments: Array<string>;
     _id?: string;
     ownerId: string;
+    imgName: string;
 }
 
 const eventSchema = new mongoose.Schema<IEvent>({
@@ -51,6 +52,10 @@ const eventSchema = new mongoose.Schema<IEvent>({
         type: String,
         required: true,
     },
+    imgName: {
+        type: String,
+        required: true,
+    }
 })
 
 export default mongoose.model<IEvent>("Events", eventSchema);

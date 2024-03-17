@@ -26,7 +26,8 @@ class eventController extends BaseController<IEvent>{
                     location: req.body.location,
                     city: req.body.city,
                     artist: req.body.artist,
-                    comments: req.body.comments});
+                    comments: req.body.comments,
+                    imgName: req.body.imgName});
             res.status(200).send(model);
         } catch(err) {
             console.log(err)
