@@ -19,6 +19,7 @@ const generateTokens = async ( res: Response, email: string) => {
 
         console.log()
         return res.status(200).send({
+            'userId': user._id,
             'accessToken': accessToken,
             'refreshToken': refreshToken
         });
@@ -149,6 +150,7 @@ const refresh = async (req: Request, res: Response) => {
             userDb.refreshTokens.push(newRefreshToken);
             await userDb.save();
             return res.status(200).send({
+                'userId': user._id,
                 'accessToken': accessToken,
                 'refreshToken': refreshToken
             });

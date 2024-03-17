@@ -19,6 +19,32 @@ class eventController extends base_controller_1.default {
     constructor() {
         super(event_model_1.default);
     }
+    getByUserId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("get events by user id:" + req.user._id);
+            const userId = req.user._id;
+            const events = yield event_model_1.default.find({ 'ownerId': userId });
+            res.status(200).send(events);
+        });
+    }
+    updateEventById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("updateEventById: " + req.body._id);
+            try {
+                const model = yield event_model_1.default.findByIdAndUpdate(req.body._id, { date: req.body.date,
+                    hour: req.body.hour,
+                    location: req.body.location,
+                    city: req.body.city,
+                    artist: req.body.artist,
+                    comments: req.body.comments });
+                res.status(200).send(model);
+            }
+            catch (err) {
+                console.log(err);
+                res.status(500).json({ message: err.message });
+            }
+        });
+    }
     post(req, res) {
         const _super = Object.create(null, {
             post: { get: () => super.post }
@@ -29,6 +55,7 @@ class eventController extends base_controller_1.default {
             console.log("connected user: " + _id);
             const user = yield user_model_1.default.findOne({ '_id': _id });
             req.body.phone = user.phone ? user.phone : user.email;
+            req.body.ownerId = _id;
             _super.post.call(this, req, res);
         });
     }
