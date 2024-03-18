@@ -12,6 +12,7 @@ const event_route_1 = __importDefault(require("./routes/event_route"));
 const event_post_route_1 = __importDefault(require("./routes/event_post_route"));
 const auth_route_1 = __importDefault(require("./routes/auth_route"));
 const user_route_1 = __importDefault(require("./routes/user_route"));
+const file_controller_1 = __importDefault(require("./controllers/file_controller"));
 const initApp = () => {
     const promise = new Promise((resolve) => {
         const db = mongoose_1.default.connection;
@@ -33,6 +34,7 @@ const initApp = () => {
             app.use("/eventPost", event_post_route_1.default);
             app.use("/auth", auth_route_1.default);
             app.use("/user", user_route_1.default);
+            app.use("/file", file_controller_1.default);
             resolve(app);
         });
     });

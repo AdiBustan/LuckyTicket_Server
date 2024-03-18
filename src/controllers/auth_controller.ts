@@ -30,7 +30,8 @@ const register = async (req: Request, res: Response) => {
     const email = req.body.email;
     const password = req.body.password;
     const phone = req.body.phone;
-    console.log("email: " + email + ", password: " + password + ", phone: " + phone);
+    const imgName = req.body.imgName;
+    console.log("email: " + email + ", password: " + password + ", phone: " + phone + ", imgName: " + imgName);
     
     if (!email || !password || !phone) {
         return res.status(400).send("missing email or password or phone");
@@ -42,7 +43,7 @@ const register = async (req: Request, res: Response) => {
         }
         const salt = await bcrypt.genSalt(10);
         const encryptedPassword = await bcrypt.hash(password, salt);
-        await User.create({ 'username': username, 'email': email, 'password': encryptedPassword, 'phone':  phone});
+        await User.create({ 'username': username, 'email': email, 'password': encryptedPassword, 'phone':  phone, 'imgName': imgName});
         
         return generateTokens(res,email)
 
