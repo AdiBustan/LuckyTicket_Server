@@ -9,6 +9,7 @@ export interface IEvent {
     phone: string;
     comments: Array<string>;
     _id?: string;
+    ownerId: string;
 }
 
 const eventSchema = new mongoose.Schema<IEvent>({
@@ -45,7 +46,11 @@ const eventSchema = new mongoose.Schema<IEvent>({
         type: [String],
         required: true,
 
-    }
+    },
+    ownerId: {
+        type: String,
+        required: true,
+    },
 })
 
 export default mongoose.model<IEvent>("Events", eventSchema);

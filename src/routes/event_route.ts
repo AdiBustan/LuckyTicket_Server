@@ -75,6 +75,8 @@ import authMiddleware from "../common/auth_middleware";
 */
 router.get("/", authMiddleware, eventController.get.bind(eventController));
 
+router.get("/myEvents/", authMiddleware, eventController.getByUserId.bind(eventController));
+
 
 /**
 * @swagger
@@ -154,7 +156,7 @@ router.post("/", authMiddleware, eventController.post.bind(eventController));
 *             schema:
 *               $ref: '#/components/schemas/Event'
 */
-router.put("/:id/", authMiddleware, eventController.putById.bind(eventController));
+router.put("/:id/", authMiddleware, eventController.updateEventById.bind(eventController));
 
 /**
 * @swagger

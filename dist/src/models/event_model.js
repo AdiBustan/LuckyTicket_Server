@@ -32,7 +32,11 @@ const eventSchema = new mongoose_1.default.Schema({
     comments: {
         type: [String],
         required: true,
-    }
+    },
+    ownerId: {
+        type: String,
+        required: true,
+    },
 });
 exports.default = mongoose_1.default.model("Events", eventSchema);
 //# sourceMappingURL=event_model.js.map

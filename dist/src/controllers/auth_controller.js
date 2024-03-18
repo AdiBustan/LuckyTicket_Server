@@ -30,6 +30,7 @@ const generateTokens = (res, email) => __awaiter(void 0, void 0, void 0, functio
     yield user.save();
     console.log();
     return res.status(200).send({
+        'userId': user._id,
         'accessToken': accessToken,
         'refreshToken': refreshToken
     });
@@ -154,6 +155,7 @@ const refresh = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             userDb.refreshTokens.push(newRefreshToken);
             yield userDb.save();
             return res.status(200).send({
+                'userId': user._id,
                 'accessToken': accessToken,
                 'refreshToken': refreshToken
             });

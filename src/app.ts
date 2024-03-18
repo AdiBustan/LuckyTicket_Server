@@ -6,6 +6,8 @@ import bodyParser from "body-parser";
 import eventRoute from "./routes/event_route";
 import eventPostRoute from "./routes/event_post_route";
 import authRoute from "./routes/auth_route";
+import userRoute from "./routes/user_route";
+import user_controller from "./controllers/user_controller";
 
 const initApp = (): Promise<Express> => {
     const promise = new Promise<Express>((resolve) => {
@@ -27,6 +29,7 @@ const initApp = (): Promise<Express> => {
             app.use("/event", eventRoute);
             app.use("/eventPost", eventPostRoute);
             app.use("/auth", authRoute);
+            app.use("/user", userRoute);
             resolve(app);
         });
     });
