@@ -18,7 +18,8 @@ const upload = multer({ storage: storage });
 router.get('/:imageName', (req, res) => {
     const imageName = req.params.imageName;
     console.log("get image: " + imageName);
-    const imagePath = path.join('/home/st111/LuckyTicket_Server/uploads', imageName);
+    const imagePath = path.join(__dirname, '/../../../uploads', imageName);
+    console.log("=========== image path: " + imagePath)
     res.sendFile(imagePath);
   });
   
