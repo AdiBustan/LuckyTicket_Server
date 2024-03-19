@@ -29,6 +29,7 @@ router.post('/upload', upload.single('image'), (req : MulterRequest, res) => {
     if (!file) {
       throw new Error('Please upload a file');
     }
+    console.log("file destination: " +file.destination);
     res.status(200).send(file.filename);
   } catch (error) {
     res.status(400).send(error.message);
