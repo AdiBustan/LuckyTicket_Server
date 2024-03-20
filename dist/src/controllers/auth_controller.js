@@ -40,7 +40,8 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const email = req.body.email;
     const password = req.body.password;
     const phone = req.body.phone;
-    console.log("email: " + email + ", password: " + password + ", phone: " + phone);
+    const imgName = req.body.imgName;
+    console.log("email: " + email + ", password: " + password + ", phone: " + phone + ", imgName: " + imgName);
     if (!email || !password || !phone) {
         return res.status(400).send("missing email or password or phone");
     }
@@ -51,7 +52,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const salt = yield bcrypt_1.default.genSalt(10);
         const encryptedPassword = yield bcrypt_1.default.hash(password, salt);
-        yield user_model_1.default.create({ 'username': username, 'email': email, 'password': encryptedPassword, 'phone': phone });
+        yield user_model_1.default.create({ 'username': username, 'email': email, 'password': encryptedPassword, 'phone': phone, 'imgName': imgName });
         return generateTokens(res, email);
     }
     catch (err) {
