@@ -61,6 +61,22 @@ import authController from "../controllers/auth_controller";
 *               $ref: '#/components/schemas/User'
 */
 router.post("/register", authController.register);
+
+
+/**
+* @swagger
+* /auth/google:
+*   post:
+*     summary: registers a new user by google account
+*     tags: [Auth]
+*     responses:
+*       200:
+*         description: The new user
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/User'
+*/
 router.post("/google", authController.googleSignin);
 
 /**
