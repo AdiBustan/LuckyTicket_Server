@@ -30,9 +30,10 @@ const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
     }
     else {
         console.log('PRODUCTION');
-        const options2 = {
-            key: fs_1.default.readFileSync('../client-key.pem'),
-            cert: fs_1.default.readFileSync('../client-cert.pem')
+        var path = require('path');
+        var options2 = {
+            key: fs_1.default.readFileSync(path.resolve('client-key.pem')),
+            cert: fs_1.default.readFileSync(path.resolve('client-cert.pem'))
         };
         https_1.default.createServer(options2, app).listen(process.env.HTTPS_PORT);
     }
