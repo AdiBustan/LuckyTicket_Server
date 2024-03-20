@@ -120,6 +120,6 @@ router.post("/", authMiddleware, user_controller.post.bind(eventController));
 *             schema:
 *               $ref: '#/components/schemas/User'
 */
-router.put("/:id/", authMiddleware, user_controller.putById.bind(eventController));
+router.put("/:id/", authMiddleware, user_controller.updateById.bind(eventController));
 
 export default router;
