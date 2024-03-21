@@ -75,6 +75,23 @@ import authMiddleware from "../common/auth_middleware";
 */
 router.get("/", authMiddleware, eventController.get.bind(eventController));
 
+
+/**
+* @swagger
+* /event/myEvents/:
+*   get:
+*     summary: get all of the event's posts of the connected user
+*     tags: [Event]
+*     security:
+*       bearerAuth: []
+*     responses:
+*       200:
+*         description: List of the posts of the user
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Event'
+*/
 router.get("/myEvents/", authMiddleware, eventController.getByUserId.bind(eventController));
 
 
